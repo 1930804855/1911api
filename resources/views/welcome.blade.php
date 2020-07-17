@@ -81,7 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Ubuntu Laravel框架
+                    API Laravel框架
                 </div>
 
                 <div class="links">

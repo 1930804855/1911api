@@ -27,3 +27,22 @@ Route::get('/wx/curltoken','IndexController@getCurlToken');
  * 使用Guzzle获取access_token
  */
 Route::get('/wx/gtoken','IndexController@getGuzzleToken');
+
+
+/**
+ * www项目调用本项目接口测试路由
+ */
+Route::get('user/info','IndexController@userinfo');
+
+/**
+ * api项目调用www项目测试
+ */
+Route::get('test','IndexController@test');
+
+/**
+ * 用户模块
+ */
+Route::prefix('user')->group(function(){
+    //用户注册
+    Route::any('reg','UserController@reg');
+});

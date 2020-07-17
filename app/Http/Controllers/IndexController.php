@@ -67,4 +67,21 @@ class IndexController extends Controller
         //打印 输出
         echo $body;
     }
+
+    /**
+     * www项目调用本项目测试
+     */
+    public function userinfo(){
+        echo "api项目 www项目调用测试";
+    }
+
+    /**
+     * api项目调用www项目测试
+     */
+    public function test(){
+        //调用地址
+        $url="http://www.1911.com/user/info";
+        //获取
+        echo file_get_contents($url);
+    }
 }

@@ -16,6 +16,21 @@ Route::get('/', function () {
 });
 
 /**
+ * phpinfo php信息
+ */
+Route::get('/phpinfo','IndexController@phpinfo');
+
+/**
+ * redis hash类型练习
+ */
+Route::get('hash','IndexController@hash');
+
+/**
+ * redis list列表练习
+ */
+Route::get('rlist','IndexController@rlist');
+
+/**
  * 微信access_token 路由
  */
 Route::get('/wx/token','IndexController@getToken');
@@ -44,5 +59,33 @@ Route::get('test','IndexController@test');
  */
 Route::prefix('user')->group(function(){
     //用户注册
-    Route::any('reg','UserController@reg');
+    Route::post('reg','UserController@reg');
+    //用户登录
+    Route::post('login','UserController@login');
+    //获取用户信息
+    Route::get('center','UserController@center');
+});
+
+
+/**
+ * 自习练习作业
+ */
+Route::prefix('test')->group(function(){
+    //商品信息
+    Route::get('goods_info','TestController@goods_info');
+    //接口限制
+    Route::get('sets','TestController@sets');
+    //有序集合 签到
+    Route::get('sorted_sets','TestController@sorted_sets');
+
+    //www项目 解密路由
+    Route::get('dec','TestController@dec');
+    //www项目 非对称解密
+    Route::get('pridec','TestController@pridec');
+    //对向加密解密路由
+    Route::get('decs','TestController@decs');
+    //MD5()验签 加密
+    Route::get('sign1','TestController@sign1');
+    //验证签名
+    Route::get('verify','TestController@verify');
 });

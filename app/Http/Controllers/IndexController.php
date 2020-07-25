@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 //引入guzzle类
 use GuzzleHttp\Client;
+//引入redis类
+use Illuminate\Support\Facades\Redis;
 
 class IndexController extends Controller
 {
@@ -83,5 +85,38 @@ class IndexController extends Controller
         $url="http://www.1911.com/user/info";
         //获取
         echo file_get_contents($url);
+    }
+
+    /**
+     * phpinfo PHP信息
+     */
+    public function phpinfo(){
+        echo phpinfo();
+    }
+
+    /**
+     * redis hash类型练习
+     */
+    public function hash(){
+        //测试数据
+        $data=[
+            'name1'   =>   'zhannsan',
+            'sex'     =>   1,
+            'age'     =>   18
+        ];
+        //redis key
+        $key='user1';
+        //存入redis
+        Redis::hmset($key,$data);
+    }
+
+    /**
+     * redis list列表练习
+     */
+    public function rlist(){
+        //设置值
+        Redis::lpush('rlist',$int);
+        $t=Redis::lrange('rlist',0,-1);
+        var_dump($t);
     }
 }

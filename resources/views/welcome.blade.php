@@ -81,7 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    API Laravel框架
+                    API Hello Word
                 </div>
 
                 <div class="links">

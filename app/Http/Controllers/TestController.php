@@ -86,7 +86,7 @@ class TestController extends Controller
     }
 
     /**
-     * www项目进行解密
+     * 进行解密www项目
      */
     public function dec(){
         //获取要解密的数据
@@ -109,7 +109,7 @@ class TestController extends Controller
     }
 
     /**
-     * www项目 进行非对称解密
+     * 进行非对称解密www项目
      */
     public function pridec(){
         //获取要进行解密的数据
@@ -185,5 +185,50 @@ class TestController extends Controller
         //验证签名
         $d=openssl_verify($data,$sign,$pub_key,OPENSSL_ALGO_SHA1);
         echo $d;
+    }
+
+    /**
+     * 数据加密+公钥验证签名
+     */
+    public function dataSign(){
+        //接值
+        $dec_str=request()->get('data');
+        $sign=request()->get('sign');
+
+        //base64解密 第二层
+        $dec_str=base64_decode($dec_str);
+        $sign=base64_decode($sign);
+
+        //解密数据
+        //加密算法
+        $method='AES-256-CBC';
+        //key 键
+        $key='1911api';
+        //加密补全选项
+        $options=OPENSSL_RAW_DATA;
+        //初始化向量
+        $iv='aaaabbbbccccdddd';
+        $dec_str=openssl_decrypt($dec_str,$method,$key,$options,$iv);
+
+        //获取公钥 验证签名
+        $pub_key=file_get_contents(storage_path('key/www.pub.key'));
+        //验证签名
+        $d=openssl_verify($dec_str,$sign,$pub_key,OPENSSL_ALGO_SHA1);
+        //判断签名
+        if($d==1){
+            echo "验签成功，数据为：".$dec_str;
+        }else{
+            echo "验签失败。";
+        }
+    }
+
+    /**
+     * 使用header 传值 接值
+     */
+    public function header1(){
+        //接值
+        $server=$_SERVER;
+        echo $server['HTTP_UID'].'<br>';
+        echo $server['HTTP_TOKEN'];
     }
 }

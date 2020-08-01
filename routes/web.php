@@ -88,4 +88,8 @@ Route::prefix('test')->group(function(){
     Route::get('sign1','TestController@sign1');
     //验证签名
     Route::get('verify','TestController@verify');
+    //数据加密+公钥验证签名
+    Route::get('datasign','TestController@dataSign');
+    //使用header传值 接值
+    Route::get('header1','TestController@header1');
 });

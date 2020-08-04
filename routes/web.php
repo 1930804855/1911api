@@ -93,3 +93,13 @@ Route::prefix('test')->group(function(){
     //使用header传值 接值
     Route::get('header1','TestController@header1');
 });
+
+/**
+ * mstore h5商城项目 api接口
+ */
+Route::prefix('mstore')->group(function(){
+    //登录接口
+    Route::post('loginDo','Mstore\LoginController@loginDO');
+    //注册接口
+    Route::post('registerDo','Mstore\LoginController@registerDo');
+});
